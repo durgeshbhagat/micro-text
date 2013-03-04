@@ -1,0 +1,21 @@
+package pilot;
+
+import java.io.*;
+import datastr.*;
+import preprocessing.*;
+
+public class CommanderInChief {
+	
+	public static String FILENAME = "";
+	
+	
+	public static int DEBUG_MODE = 0; 
+	
+	public static void main(String[] args) throws IOException {
+		System.out.println("Ahoy!");
+		Dataset dataset = new Dataset();
+		new Preprocessor(FILENAME, dataset);
+		new Dictionary(dataset);
+		
+	}
+}
