@@ -57,7 +57,6 @@ public class Dictionary {
 					// ---------------------------------------------insert in Dictionary start---------------------------------------
 					if (dataset.dictionary.containsKey(temp))
 					{
-						
 						Word tempw = dataset.dictionary.get(temp);
 						int t = w.count;
 						tempw.count = tempw.count + t;
@@ -76,7 +75,6 @@ public class Dictionary {
 			}
 		}
 		sanityCheck(dataset);
-		//System.exit(0);
 		if (CommanderInChief.DEBUG_MODE == 1)
 			System.out.println("Total Dictionary elements Count= "+ dataset.dictionary.size());
 		// our dictionary has been populated now...Yay!

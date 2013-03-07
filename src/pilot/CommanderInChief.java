@@ -24,7 +24,6 @@ public class CommanderInChief {
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter("src/resources/dataset/train.txt"));
 		Iterator<Tweet> it=dataset.Tweets.iterator();
-		
 		int counter=0;
 		while(it.hasNext())
 		{
