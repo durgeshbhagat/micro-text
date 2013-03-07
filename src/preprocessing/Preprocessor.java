@@ -33,8 +33,6 @@ public class Preprocessor {
 		this.stop=new String[1000];
 		this.filename=filename;
 		this.dataset=dataset;
-		
-		System.out.println("Check2");
 		String file=filename.substring(filename.lastIndexOf('/')+1,filename.length());
 		if(CommanderInChief.DEBUG_MODE == 0) System.out.println("Preprocessing tweets");
 		// TODO: Make the stop word removal efficient by utilizing the Hashmap stopWords created at Dataset.  
