@@ -97,21 +97,14 @@ public class Preprocessor {
             	//if(tok.length<2) {line=brd.readLine();continue;}
             	Tweet tw = new Tweet(line);
             	line = tw.getText();
-            	
             	line = cleanText(line);
 				line = line.toLowerCase();
 				line = removeStopWords(line);
-
 				tw.setText_no_sw(line);
 				line = line.trim();
 				
-				
-				
-				
-				
-            	
-				ArrayList<Word> wrdlst=new ArrayList<Word>();
-            	String token[] = line.split(" ");//extracting words from the that particular tweet
+				ArrayList<Word> wrdlst = new ArrayList<Word>();
+            	String token[] = line.split(" ");//extracting words from the that particular tweet--stop words removed
             	int l=token.length;totalWordCount+=l;
             	
             	for(int i=0;i<l;i++)
@@ -122,7 +115,13 @@ public class Preprocessor {
             		while(it.hasNext())
             		{
             			Word wt=(Word) it.next();
-            			if(wt.word.equals(token[i])) {wt.count++;flag=1;break;}
+            			if(wt.word.equals(token[i]))
+            			{
+            				wt.count++;
+            				//if(wt.count > 5) {System.out.println("---------------"+wt.word+"__in__"+line);}
+            				if(token[i].contains("start")) System.out.println("!!!!!!!!!!!!!!!"+wt.count);
+            				flag=1;break;
+            			}
             		}
             		if(flag==0)
             		{
@@ -130,6 +129,7 @@ public class Preprocessor {
             			w.idf=1;
             			wrdlst.add(w);
             		}
+            		//if(token[i].equals("start")) System.exit(0);
             	}
             	tw.setWordList(wrdlst);
             	
@@ -143,6 +143,7 @@ public class Preprocessor {
             	line = brd.readLine();            	  
             }
             brd.close();
+            //System.exit(0);
             if(CommanderInChief.DEBUG_MODE == 1)
             {
             	System.out.println("Total no of tweets= "+tweetNo);

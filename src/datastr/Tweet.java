@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-
-
-
 public class Tweet {
 	
 	private String user;
@@ -21,7 +18,7 @@ public class Tweet {
 	private Date date;
 	private String text;
 	private String text_no_sw;
-	private ArrayList<Word> wordList = new ArrayList<Word>();
+	private ArrayList<Word> wordList = new ArrayList<Word>(); // after removing stop words
 	public long tweetID;
 	public int[] bagOfWordsRep;
 	
