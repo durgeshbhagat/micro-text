@@ -60,7 +60,6 @@ public class Preprocessor {
 			    while(word != null)
 			    {
 			    	word=word.trim();
-			    	//System.out.println(word);
 			    	if(dataset.stopWords.containsKey(word)==false)
 			    	{
 			    		dataset.stopWords.put(word, word);
@@ -70,8 +69,6 @@ public class Preprocessor {
 			    }
 			    br.close();
 				} catch (FileNotFoundException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
-            
-         
 		System.out.println("Size of StopWords Hash Table = "+dataset.stopWords.size()+" value of stopcount= "+stopcount);
 	}
 	
@@ -80,7 +77,6 @@ public class Preprocessor {
 		/* This function will take in the text from the filename and process each tweet and adds it to the Dataset class
 		 * variable Tweets
 		 */
-		
 		int totalWordCount = 0;
 		try{
 			BufferedReader  brd = new BufferedReader(new FileReader(filename));
@@ -89,8 +85,6 @@ public class Preprocessor {
             while(line != null)
             {
             	tweetNo++;
-            	//String tok[]=line.split("\t");
-            	//if(tok.length<2) {line=brd.readLine();continue;}
             	Tweet tw = new Tweet(line);
             	line = tw.getText();
             	line = cleanText(line);
@@ -98,11 +92,9 @@ public class Preprocessor {
 				line = removeStopWords(line);
 				tw.setText_no_sw(line);
 				line = line.trim();
-				
 				ArrayList<Word> wrdlst = new ArrayList<Word>();
             	String token[] = line.split(" ");//extracting words from the that particular tweet--stop words removed
             	int l=token.length;totalWordCount+=l;
-            	
             	for(int i=0;i<l;i++)
             	{
             		token[i]=token[i].trim();
@@ -125,7 +117,6 @@ public class Preprocessor {
             			w.idf=1;
             			wrdlst.add(w);
             		}
-            		//if(token[i].equals("start")) System.exit(0);
             	}
             	tw.setWordList(wrdlst);
             	// check the wrdlist now
@@ -135,14 +126,10 @@ public class Preprocessor {
     				Word ww = it.next();
     				if(ww.count > 5) System.out.println(ww.word+"__"+ww.count);
     			}	
-    			
             	dataset.Tweets.add(tw);
-
-            	//System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             	line = brd.readLine();            	  
             }
             brd.close();
-            //System.exit(0);
             if(CommanderInChief.DEBUG_MODE == 1)
             {
             	System.out.println("Total no of tweets= "+tweetNo);
