@@ -6,12 +6,12 @@
 package datastr;
 
 
-import datastr.Word;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+
+
 
 
 public class Tweet {
@@ -21,8 +21,9 @@ public class Tweet {
 	private Date date;
 	private String text;
 	private String text_no_sw;
-	private ArrayList<Word> wordList;
-	public int tweetID;
+	private ArrayList<Word> wordList = new ArrayList<Word>();
+	public long tweetID;
+	public int[] bagOfWordsRep;
 	
 	@SuppressWarnings("unused")
 	private String url;
@@ -32,7 +33,7 @@ public class Tweet {
 	// TODO: modify this once we know the format of the dataset.
 	public Tweet(String tweet) throws ParseException
 	{
-		this.tweetID = Integer.parseInt(tweet.substring(0, tweet.indexOf(" ")));
+		this.tweetID = Long.parseLong(tweet.substring(0, tweet.indexOf(" ")));
 		tweet = tweet.substring(tweet.indexOf(" ")+1, tweet.length());
 		tweet = tweet.trim();
 		
@@ -43,11 +44,28 @@ public class Tweet {
 		tweet = tweet.trim();
 		
 		this.text = tweet.toLowerCase();
-		//cleanText(); // not sure about this comment out
-	}
+		//cleanText(); // not sure about this comment out    
+	}                                                       
 
 	
-	//--------------------------------------------------------
+	
+	//--------------------------------------------------------   
+	
+	
+	
+	public int[] getBagOfWordsRepresentation(){
+		
+		return bagOfWordsRep;
+				
+	}
+	
+	public void setBagOfWordsRepresentation(int[] BOWR){
+		bagOfWordsRep= new int[BOWR.length];
+		bagOfWordsRep=BOWR;
+		//System.out.println(Arrays.toString(bagOfWordsRep));
+		
+	}
+	
 	
 	public String getUser()
 	{

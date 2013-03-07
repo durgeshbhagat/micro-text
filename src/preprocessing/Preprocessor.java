@@ -3,6 +3,7 @@ package preprocessing;
 
 import java.io.*;
 import java.util.*;
+
 import javax.xml.stream.events.Comment;
 import datastr.Tweet;
 import datastr.Word;
@@ -26,19 +27,24 @@ public class Preprocessor {
 	public String stop[];
 	public int stopcount;
 	
+	
 	public Preprocessor(String filename, Dataset dataset) throws IOException
 	{
 		this.stop=new String[1000];
 		this.filename=filename;
 		this.dataset=dataset;
 		
-		
+		System.out.println("Check2");
 		String file=filename.substring(filename.lastIndexOf('/')+1,filename.length());
 		if(CommanderInChief.DEBUG_MODE == 0) System.out.println("Preprocessing tweets");
 		// TODO: Make the stop word removal efficient by utilizing the Hashmap stopWords created at Dataset.  
 		populateStopWords();
-		
+		System.out.println("Check3");
 		fillTweets(filename,dataset);
+		
+		
+		
+		
 
 		if(CommanderInChief.DEBUG_MODE == 1)
 		{
@@ -54,10 +60,11 @@ public class Preprocessor {
 				stopcount=0;
 				br = new BufferedReader(new FileReader("src/resources/stopwords.txt"));
 			    String word = br.readLine();
+			    dataset.stopWords = new HashMap<String,String>();
 			    while(word != null)
 			    {
 			    	word=word.trim();
-			    	
+			    	//System.out.println(word);
 			    	if(dataset.stopWords.containsKey(word)==false)
 			    	{
 			    		dataset.stopWords.put(word, word);
@@ -97,6 +104,11 @@ public class Preprocessor {
 
 				tw.setText_no_sw(line);
 				line = line.trim();
+				
+				
+				
+				
+				
             	
 				ArrayList<Word> wrdlst=new ArrayList<Word>();
             	String token[] = line.split(" ");//extracting words from the that particular tweet
@@ -120,6 +132,7 @@ public class Preprocessor {
             		}
             	}
             	tw.setWordList(wrdlst);
+            	
             	dataset.Tweets.add(tw);
             	
             	if(tweetNo%50000 == 0) 
