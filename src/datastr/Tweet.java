@@ -58,7 +58,11 @@ public class Tweet {
 	
 	public void setBagOfWordsRepresentation(int[] BOWR){
 		bagOfWordsRep= new int[BOWR.length];
-		bagOfWordsRep=BOWR;
+		for(int i=0;i<BOWR.length;i++)
+		{
+			bagOfWordsRep[i] = BOWR[i];
+		}
+		//bagOfWordsRep=BOWR;
 		//System.out.println(Arrays.toString(bagOfWordsRep));
 		
 	}

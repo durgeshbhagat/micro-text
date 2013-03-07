@@ -42,10 +42,6 @@ public class Preprocessor {
 		System.out.println("Check3");
 		fillTweets(filename,dataset);
 		
-		
-		
-		
-
 		if(CommanderInChief.DEBUG_MODE == 1)
 		{
 			System.out.println("Filename = "+filename);
@@ -132,14 +128,17 @@ public class Preprocessor {
             		//if(token[i].equals("start")) System.exit(0);
             	}
             	tw.setWordList(wrdlst);
-            	
+            	// check the wrdlist now
+    			Iterator<Word> it = wrdlst.iterator();
+    			while (it.hasNext())
+    			{
+    				Word ww = it.next();
+    				if(ww.count > 5) System.out.println(ww.word+"__"+ww.count);
+    			}	
+    			
             	dataset.Tweets.add(tw);
-            	
-            	if(tweetNo%50000 == 0) 
-            	{
-            			System.out.println("\nInside fillTweets() in Preprocess.java. Total Word Count= "+totalWordCount+" TweetNo= "+tweetNo);
-            	}
-            	
+
+            	//System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             	line = brd.readLine();            	  
             }
             brd.close();

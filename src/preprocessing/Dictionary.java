@@ -31,6 +31,10 @@ public class Dictionary {
 		int twno = 0;
 		int index = 0;
 		int counter = 0;
+		
+		sanityCheck(dataset);
+		//-------------------------------------------------------------
+		
 		while (itr.hasNext()) {
 			// now deal with each tweet and insert the words in each tweet in
 			// Dictionary if its not present already
@@ -40,7 +44,7 @@ public class Dictionary {
 			Tweet tw = itr.next();
 			ArrayList<Word> list = tw.getWordList();
 			Iterator<Word> wrditr = list.iterator();
-			Word tempw;
+			//Word tempw;
 			tempidf = 0;
 			// for each word in this particular tweet modify the dictionary &
 			// wcl.list accordingly
@@ -49,35 +53,43 @@ public class Dictionary {
 				Word w = wrditr.next();
 				w.word = w.word.trim();
 				w.word = w.word.toLowerCase();
-				if (w.word.length() > 1) {
+				String temp = w.word;
+				if (temp.length() > 1) {
 					// ---------------------------------------------insert in
 					// Dictionary start---------------------------------------
-					if (dataset.dictionary.containsKey(w.word)) {
-						tempw = dataset.dictionary.get(w.word);
-						if (tempw.index == 0) {
+					if (dataset.dictionary.containsKey(temp))
+					{
+						
+						Word tempw = dataset.dictionary.get(temp);
+						/*if (tempw.index == 0) {
 							System.out.println("something wrong!!");
 							System.exit(0);
-						}
-						tempw.count += w.count;
+						}*/
+						int t = w.count;
+						tempw.count = tempw.count + t;
 						tempw.idf++;
-						dataset.dictionary.put(tempw.word, tempw);// added this
-																	// on 6th
-																	// June 2012
-					} else {
+						dataset.dictionary.put(tempw.word, tempw);// added this on 6th June 2012
+					}
+					else
+					{
 						// if(index==0)
 						// System.out.println("anomaly counter ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 						// +counter++);
 						// System.exit(0);
-						w.id = UUID.randomUUID();
-						w.index = index++;
+					//	if(w.count > 5) System.out.println("~~!!@@~~!!@@!~~~~~~~"+w.word+"_"+w.count);
+						Word tempw = new Word(w.word,w.count);
+						tempw.id = UUID.randomUUID();
+						tempw.index = index++;
 						// System.out.println("Index = _"+index);
-						dataset.dictionary.put(w.word, w);
+						dataset.dictionary.put(tempw.word, tempw);
 					}
 					// ---------------------------------------------insert in
 					// Dictionary end---------------------------------------
 				}
 			}
 		}
+		sanityCheck(dataset);
+		//System.exit(0);
 		if (CommanderInChief.DEBUG_MODE == 1)
 			System.out.println("Total Dictionary elements Count= "
 					+ dataset.dictionary.size());
@@ -86,6 +98,22 @@ public class Dictionary {
 		// count...
 		populateDict4Rep(dataset);
 		generateBOWM(dataset);
+	}
+	
+	public void sanityCheck(Dataset dataset)
+	{
+		Iterator<Tweet> itr = dataset.Tweets.iterator();
+		while(itr.hasNext())
+		{
+			Tweet tt =itr.next();
+			Iterator<Word> it = tt.getWordList().iterator();
+			while (it.hasNext())
+			{
+				Word ww = it.next();
+				if(ww.count > 5) System.out.println(ww.word+"__"+ww.count);
+			}
+		}
+		//System.exit(0);
 	}
 
 	public void populateDict4Rep(Dataset dataset) {
@@ -128,18 +156,18 @@ public class Dictionary {
 
 			while (it.hasNext())
 			{
-				Word wt = (Word) it.next();
-				System.out.println(wt.count+"__"+wt.word);
+				Word wt = it.next();
+				//System.out.println(wt.count+"__"+wt.word);
 				if (dataset.dictionary4Rep.containsKey(wt.word))
 				{
 					Word w = dataset.dictionary4Rep.get(wt.word);
-					bagOfWordsRep[w.index] = wt.count;
-					if(w.word.equals("start"))
+					bagOfWordsRep[w.index] += wt.count;
+					if(wt.count > 2)
 					{
-						System.out.println("~~~~~~~~"+wt.count+"__in_"+tw.getText());
+						System.out.println("!!~~~~~~~~at_"+w.index+"__count= "+wt.count+"__++__"+wt.word+"__++_"+tw.getText());
 						//System.exit(0);
 					} 
-					System.out.println(w.word + w.index);
+					//System.out.println(w.word + w.index);
 					// System.out.println("one written");
 				}
 			}
