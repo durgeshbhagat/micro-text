@@ -32,7 +32,7 @@ public class CommanderInChief {
 	
 	public static void writeRepToFile(Dataset dataset) throws IOException
 	{
-		BufferedWriter bw = new BufferedWriter(new FileWriter("src/resources/dataset/train.txt"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("src/resources/dataset/train_GEN.txt"));
 		Iterator<Tweet> it=dataset.Tweets.iterator();
 		int counter=0;
 		int numAttributes = dataset.Tweets.get(0).getBagOfWordsRepresentation().length;
@@ -57,7 +57,7 @@ public class CommanderInChief {
 		bw.close();
 
 
-		bw = new BufferedWriter(new FileWriter("src/resources/dataset/train2.txt"));
+		bw = new BufferedWriter(new FileWriter("src/resources/dataset/WEKA_train.arff"));
 
 		bw.write("@RELATION twit\n");
 

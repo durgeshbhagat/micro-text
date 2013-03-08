@@ -50,7 +50,7 @@ public class PrepareTest implements Serializable {
 		bw.close();
 
 
-		bw = new BufferedWriter(new FileWriter("src/resources/dataset/WEKA_Validate.txt"));
+		bw = new BufferedWriter(new FileWriter("src/resources/dataset/WEKA_Validate.arff"));
 
 		bw.write("@RELATION twit\n");
 

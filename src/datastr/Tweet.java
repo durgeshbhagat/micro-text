@@ -37,8 +37,8 @@ public class Tweet {
 		/*String temp = tweet.substring(0, tweet.indexOf(" "));
 		if(temp.equals("Politics")) this.label = 0;
 		else this.label = 1;
-		
 		*/
+		
 		tweet = tweet.substring(tweet.indexOf(" ")+1, tweet.length());
 		tweet = tweet.trim();
 		
