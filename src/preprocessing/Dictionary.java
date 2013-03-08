@@ -119,7 +119,7 @@ public class Dictionary {
 
 	public void generateBOWM(Dataset dataset) {
 		int totalUniqueWordCount4Rep = dataset.dictionary4Rep.size();
-		System.out.println("totalUniqueWordCount4Rep =_"+ totalUniqueWordCount4Rep);
+		System.out.println("-----------------------totalUniqueWordCount4Rep =_"+ totalUniqueWordCount4Rep);
 		Iterator<Tweet> iter = dataset.Tweets.iterator();
 		int bagOfWordsRep[] = new int[totalUniqueWordCount4Rep + 1];
 		
@@ -137,7 +137,7 @@ public class Dictionary {
 				{
 					Word w = dataset.dictionary4Rep.get(wt.word);
 					bagOfWordsRep[w.index] += wt.count;
-					if(wt.count > 2) System.out.println("!!~~~~~~~~at_"+w.index+"__count= "+wt.count+"__++__"+wt.word+"__++_"+tw.getText());
+					//if(wt.count > 2) System.out.println("!!~~~~~~~~at_"+w.index+"__count= "+wt.count+"__++__"+wt.word+"__++_"+tw.getText());
 				}
 			}
 			tw.setBagOfWordsRepresentation(bagOfWordsRep);

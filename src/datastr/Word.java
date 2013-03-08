@@ -5,10 +5,15 @@
 
 package datastr;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Word {
+public class Word implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String word;
 	public int count;
 	public double idf;

@@ -105,7 +105,7 @@ public class Preprocessor {
             			{
             				wt.count++;
             				//if(wt.count > 5) {System.out.println("---------------"+wt.word+"__in__"+line);}
-            				if(token[i].contains("start")) System.out.println("!!!!!!!!!!!!!!!"+wt.count);
+            				//if(token[i].contains("start")) System.out.println("!!!!!!!!!!!!!!!"+wt.count);
             				flag=1;break;
             			}
             		}

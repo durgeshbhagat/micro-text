@@ -33,10 +33,12 @@ public class Tweet {
 		this.tweetID = Long.parseLong(tweet.substring(0, tweet.indexOf(" ")));
 		tweet = tweet.substring(tweet.indexOf(" ")+1, tweet.length());
 		tweet = tweet.trim();
-		
-		String temp = tweet.substring(0, tweet.indexOf(" "));
+		//  CHANGED TO SUIT VALIDATION DATA, 
+		/*String temp = tweet.substring(0, tweet.indexOf(" "));
 		if(temp.equals("Politics")) this.label = 0;
 		else this.label = 1;
+		
+		*/
 		tweet = tweet.substring(tweet.indexOf(" ")+1, tweet.length());
 		tweet = tweet.trim();
 		
@@ -51,22 +53,18 @@ public class Tweet {
 	
 	
 	public int[] getBagOfWordsRepresentation(){
-		
 		return bagOfWordsRep;
-				
 	}
 	
 	public void setBagOfWordsRepresentation(int[] BOWR){
-		bagOfWordsRep= new int[BOWR.length];
+		this.bagOfWordsRep= new int[BOWR.length];
 		for(int i=0;i<BOWR.length;i++)
 		{
-			bagOfWordsRep[i] = BOWR[i];
+			this.bagOfWordsRep[i] = BOWR[i];
 		}
 		//bagOfWordsRep=BOWR;
 		//System.out.println(Arrays.toString(bagOfWordsRep));
-		
 	}
-	
 	
 	public String getUser()
 	{
@@ -144,5 +142,4 @@ public class Tweet {
 	}
 	
 }
-
 
